@@ -4,10 +4,8 @@
 #include "esphome/components/time/real_time_clock.h"
 // #include "timeinfo.h" esp32 has the time already
 
-
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
-
 
 int actualHours, actualMinutes, actualSecond, actualDay, actualMonth, actualYear, DayOfW;
 int impulseArray[60];
@@ -16,6 +14,9 @@ int timeRunningContinuous = 0;
 
 esphome::time::RealTimeClock* time_id;
 Ticker tickerDecisec; // TBD at 100ms
+
+#define LOW 0
+#define HIGH 1
  
 
 void DcfOut()
