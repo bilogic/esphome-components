@@ -14,7 +14,7 @@ void Dcf77::setup() {
 void Dcf77::write_state(bool state) {    
     ESP_LOGW(TAG, "W Dcf77 state()");
     ESP_LOGCONFIG(TAG, "Dcf77 setup()");
-    publish_state(state);
+    this->publish_state(state);
 }
 
 void Dcf77::dump_config(){
