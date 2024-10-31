@@ -38,12 +38,12 @@ void Dcf77a::write_state(bool state) {
     ESP_LOGCONFIG(TAG, "Dcf77a write_state()");
     
     if (this->state){
-        ESP_LOGCONFIG(TAG, "Dcf77a attach_ms()");    
-        tickerDecisec.attach_ms(100, DcfOut); // from now on calls DcfOut every 100ms
+        ESP_LOGCONFIG(TAG, "Dcf77a stop");
+        tickerDecisec.detach();
     }
     else{
-        ESP_LOGCONFIG(TAG, "Dcf77a detach_ms()");
-        tickerDecisec.detach();
+        ESP_LOGCONFIG(TAG, "Dcf77a start signalling");    
+        tickerDecisec.attach_ms(100, DcfOut); // from now on calls DcfOut every 100ms
     }
 
     this->publish_state(state);
