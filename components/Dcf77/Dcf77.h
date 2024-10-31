@@ -7,8 +7,6 @@
 namespace esphome {
 namespace Bilogic {
 
-Ticker tickerDecisec; // TBD at 100ms
-
 class Dcf77 : public switch_::Switch, public Component {
     public:
         void setup() override;          
