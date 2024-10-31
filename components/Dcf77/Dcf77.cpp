@@ -1,14 +1,14 @@
 #include "esphome/core/log.h"
 #include "Dcf77.h"
 #include "Tranmitter.h"
+#include "TranmitterConfig.h"
 
 namespace esphome {
 namespace Bilogic {
 
 static const char *TAG = "Dcf77.switch";
 
-void Dcf77::setup() {    
-    ESP_LOGW(TAG, "W Dcf77 setup()");
+void Dcf77::setup() {        
     ESP_LOGCONFIG(TAG, "Dcf77 setup()");
     
     ledcSetup(0, 77500, 8);       // DCF77 frequency
@@ -17,7 +17,14 @@ void Dcf77::setup() {
     pinMode(LEDBUILTIN, OUTPUT);
     digitalWrite(LEDBUILTIN, LOW); // LOW if LEDBUILTIN is inverted like in Wemos boards
 
-    tickerDecisec.attach_ms(100, DcfOut); // from now on calls DcfOut every 100ms
+    if (this->state){
+        ESP_LOGCONFIG(TAG, "Dcf77 attach_ms()");    
+        tickerDecisec.attach_ms(100, DcfOut); // from now on calls DcfOut every 100ms
+    }
+    else{
+        ESP_LOGCONFIG(TAG, "Dcf77 detach_ms()");
+        tickerDecisec.detach();
+    }
 }
 
 void Dcf77::write_state(bool state) {   

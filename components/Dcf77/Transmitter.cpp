@@ -1,3 +1,4 @@
+#include "esphome/core/log.h"
 #include "esphome/components/time/real_time_clock.h"
 // #include "timeinfo.h" esp32 has the time already
 #include "TransmitterConfig.h"
@@ -7,6 +8,69 @@ int impulseArray[60];
 int impulseCount = 0;
 int timeRunningContinuous = 0;
 time::RealTimeClock* time_id
+
+void DcfOut()
+{
+    switch (impulseCount++)
+    {
+    case 0:
+        if (impulseArray[actualSecond] != 0)
+        {
+            digitalWrite(LEDBUILTIN, LOW);
+            ledcWrite(0, 0);
+        }
+        break;
+    case 1:
+        if (impulseArray[actualSecond] == 1)
+        {
+            digitalWrite(LEDBUILTIN, HIGH);
+            ledcWrite(0, 127);
+        }
+        break;
+    case 2:
+        digitalWrite(LEDBUILTIN, HIGH);
+        ledcWrite(0, 127);
+        break;
+    case 9:
+        impulseCount = 0;
+
+        if (actualSecond == 1 || actualSecond == 15 || actualSecond == 21 || actualSecond == 29)
+            Serial.print("-");
+        if (actualSecond == 36 || actualSecond == 42 || actualSecond == 45 || actualSecond == 50)
+            Serial.print("-");
+        if (actualSecond == 28 || actualSecond == 35 || actualSecond == 58)
+            Serial.print("P");
+
+        if (impulseArray[actualSecond] == 1)
+            Serial.print("0");
+        if (impulseArray[actualSecond] == 2)
+            Serial.print("1");
+
+        if (actualSecond == 59)
+        {
+            Serial.println();
+            show_time();
+#ifndef CONTINUOUSMODE
+            if ((dontGoToSleep == 0) or ((dontGoToSleep + onTimeAfterReset) < millis()))
+                cronCheck();
+#else
+            Serial.println("CONTINUOUS MODE NO CRON!!!");
+            timeRunningContinuous++;
+            if (timeRunningContinuous > 360)
+                ESP.restart(); // 6 hours running, then restart all over
+#endif
+        }
+        break;
+    }
+    if (!getLocalTime(&timeinfo))
+    {
+        Serial.println("Error obtaining time...");
+        delay(3000);
+        ESP.restart();
+    }
+    CodeTime();
+}
+
 
 int Bin2Bcd(int dato)
 {
@@ -130,66 +194,4 @@ void CodeTime()
 
     //last missing pulse
     impulseArray[59] = 0; // No pulse
-}
-
-void DcfOut()
-{
-    switch (impulseCount++)
-    {
-    case 0:
-        if (impulseArray[actualSecond] != 0)
-        {
-            digitalWrite(LEDBUILTIN, LOW);
-            ledcWrite(0, 0);
-        }
-        break;
-    case 1:
-        if (impulseArray[actualSecond] == 1)
-        {
-            digitalWrite(LEDBUILTIN, HIGH);
-            ledcWrite(0, 127);
-        }
-        break;
-    case 2:
-        digitalWrite(LEDBUILTIN, HIGH);
-        ledcWrite(0, 127);
-        break;
-    case 9:
-        impulseCount = 0;
-
-        if (actualSecond == 1 || actualSecond == 15 || actualSecond == 21 || actualSecond == 29)
-            Serial.print("-");
-        if (actualSecond == 36 || actualSecond == 42 || actualSecond == 45 || actualSecond == 50)
-            Serial.print("-");
-        if (actualSecond == 28 || actualSecond == 35 || actualSecond == 58)
-            Serial.print("P");
-
-        if (impulseArray[actualSecond] == 1)
-            Serial.print("0");
-        if (impulseArray[actualSecond] == 2)
-            Serial.print("1");
-
-        if (actualSecond == 59)
-        {
-            Serial.println();
-            show_time();
-#ifndef CONTINUOUSMODE
-            if ((dontGoToSleep == 0) or ((dontGoToSleep + onTimeAfterReset) < millis()))
-                cronCheck();
-#else
-            Serial.println("CONTINUOUS MODE NO CRON!!!");
-            timeRunningContinuous++;
-            if (timeRunningContinuous > 360)
-                ESP.restart(); // 6 hours running, then restart all over
-#endif
-        }
-        break;
-    }
-    if (!getLocalTime(&timeinfo))
-    {
-        Serial.println("Error obtaining time...");
-        delay(3000);
-        ESP.restart();
-    }
-    CodeTime();
 }
