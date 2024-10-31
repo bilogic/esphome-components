@@ -1,5 +1,5 @@
 #include "esphome/core/log.h"
-#include "Dcf77.h"
+#include "Dcf77a.h"
 #include "Transmitter.h"
 #include "TransmitterConfig.h"
 

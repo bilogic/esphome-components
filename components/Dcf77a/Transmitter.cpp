@@ -18,9 +18,7 @@ Ticker tickerDecisec; // TBD at 100ms
 
 #define LOW 0
 #define HIGH 1
-
-esphome::gpio::GPIOPin *signal{LEDBUILTIN};
-esphome::gpio::GPIOPin *led{LEDBUILTIN};
+ 
 
 void DcfOut()
 {    
@@ -29,32 +27,20 @@ void DcfOut()
     case 0:
         if (impulseArray[actualSecond] != 0)
         {
-            this->signal->setup();
-            this->signal->digital_write(LOW);
-            this->led->setup();
-            this->led->digital_write(LOW);
-            // digitalWrite(LEDBUILTIN, LOW);
-            // ledcWrite(0, 0);
+            digitalWrite(LEDBUILTIN, LOW);
+            ledcWrite(0, 0);
         }
         break;
     case 1:
         if (impulseArray[actualSecond] == 1)
         {
-            this->signal->setup();
-            this->signal->digital_write(HIGH);
-            this->led->setup();
-            this->led->digital_write(HIGH);
-            // digitalWrite(LEDBUILTIN, HIGH);
-            // ledcWrite(0, 127);
+            digitalWrite(LEDBUILTIN, HIGH);
+            ledcWrite(0, 127);
         }
         break;
-    case 2:
-        this->signal->setup();
-        this->signal->digital_write(HIGH);
-        this->led->setup();
-        this->led->digital_write(HIGH);
-        // digitalWrite(LEDBUILTIN, HIGH);
-        // ledcWrite(0, 127);
+    case 2:        
+        digitalWrite(LEDBUILTIN, HIGH);
+        ledcWrite(0, 127);
         break;
     case 9:
         impulseCount = 0;
