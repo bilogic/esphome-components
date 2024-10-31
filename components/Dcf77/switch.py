@@ -5,6 +5,7 @@ from esphome.const import CONF_ID
 
 set_ns = cg.esphome_ns.namespace('Bilogic')
 Dcf77 = set_ns.class_('Dcf77', switch.Switch, cg.Component)
+CONF_UTC = "utc_seconds"
 
 CONFIG_SCHEMA = switch.SWITCH_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(Dcf77),
