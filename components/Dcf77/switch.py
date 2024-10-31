@@ -8,8 +8,8 @@ Dcf77 = set_ns.class_('Dcf77', switch.Switch, cg.Component)
 CONF_UTC = "utc_seconds"
 
 CONFIG_SCHEMA = switch.SWITCH_SCHEMA.extend({
-    cv.GenerateID(): cv.declare_id(Dcf77),
-    cv.Required(CONF_UTC): 28800,
+    cv.GenerateID(): cv.declare_id(Dcf77),    
+    cv.Optional(CONF_UTC): 28800,
     # cv.Required(CONF_UTC): cv.use_id(uart.UARTComponent)
 }).extend(cv.COMPONENT_SCHEMA)
 
