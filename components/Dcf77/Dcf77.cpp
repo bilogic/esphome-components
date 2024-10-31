@@ -2,6 +2,7 @@
 #include "Dcf77.h"
 #include "Transmitter.h"
 #include "TransmitterConfig.h"
+#include "esphome/components/time/real_time_clock.h"
 
 namespace esphome {
 namespace Bilogic {

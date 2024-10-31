@@ -7,8 +7,8 @@ extern int actualHours, actualMinutes, actualSecond, actualDay, actualMonth, act
 extern int impulseArray[60];
 extern int impulseCount;
 extern int timeRunningContinuous;
-time::RealTimeClock* time_id
 
+time::RealTimeClock* time_id
 Ticker tickerDecisec; // TBD at 100ms
 
 int Bin2Bcd(int dato);
