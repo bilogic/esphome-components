@@ -4,6 +4,11 @@
 #include "esphome/components/time/real_time_clock.h"
 // #include "timeinfo.h" esp32 has the time already
 
+
+#include "esphome/core/component.h"
+#include "esphome/core/hal.h"
+#include "esphome/components/stepper/stepper.h"
+
 int actualHours, actualMinutes, actualSecond, actualDay, actualMonth, actualYear, DayOfW;
 int impulseArray[60];
 int impulseCount = 0;
@@ -16,26 +21,40 @@ Ticker tickerDecisec; // TBD at 100ms
 #define HIGH 1
 
 void DcfOut()
-{
+{    
+    GPIOPin *signal{LEDBUILTIN};
+    GPIOPin *led{LEDBUILTIN};
     switch (impulseCount++)
     {
     case 0:
         if (impulseArray[actualSecond] != 0)
         {
-            digital_write(LEDBUILTIN, LOW);
-            ledcWrite(0, 0);
+            this->signal->setup();
+            this->signal->digital_write(LOW);
+            this->led->setup();
+            this->led->digital_write(LOW);
+            // digitalWrite(LEDBUILTIN, LOW);
+            // ledcWrite(0, 0);
         }
         break;
     case 1:
         if (impulseArray[actualSecond] == 1)
         {
-            digitalWrite(LEDBUILTIN, HIGH);
-            ledcWrite(0, 127);
+            this->signal->setup();
+            this->signal->digital_write(HIGH);
+            this->led->setup();
+            this->led->digital_write(HIGH);
+            // digitalWrite(LEDBUILTIN, HIGH);
+            // ledcWrite(0, 127);
         }
         break;
     case 2:
-        digitalWrite(LEDBUILTIN, HIGH);
-        ledcWrite(0, 127);
+        this->signal->setup();
+        this->signal->digital_write(HIGH);
+        this->led->setup();
+        this->led->digital_write(HIGH);
+        // digitalWrite(LEDBUILTIN, HIGH);
+        // ledcWrite(0, 127);
         break;
     case 9:
         impulseCount = 0;
