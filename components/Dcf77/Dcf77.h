@@ -6,11 +6,10 @@
 namespace esphome {
 namespace Bilogic {
 
-// class Dcf77 : public switch_::Switch, public Component {
-class Dcf77 : public Component, public Switch {
+class Dcf77 : public switch_::Switch, public Component {
     public:
         void setup() override;
-        // void write_state(bool state) override;
+        void write_state(bool state) override;
         void dump_config() override;
         void set_utc(uint32_t utc_seconds) { this->utc_seconds = utc_seconds; };
   
