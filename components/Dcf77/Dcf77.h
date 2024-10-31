@@ -3,9 +3,15 @@
 #include "esphome/core/component.h"
 #include "esphome/components/switch/switch.h"
 #include "esphome/components/time/real_time_clock.h"
+#include "Ticker.h"
 
 namespace esphome {
 namespace Bilogic {
+
+
+time::RealTimeClock* time_id
+Ticker tickerDecisec; // TBD at 100ms
+
 
 class Dcf77 : public switch_::Switch, public Component {
     public:
