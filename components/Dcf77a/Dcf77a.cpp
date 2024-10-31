@@ -16,15 +16,6 @@ void Dcf77a::setup() {
     
     pinMode(LEDBUILTIN, OUTPUT);
     digitalWrite(LEDBUILTIN, LOW); // LOW if LEDBUILTIN is inverted like in Wemos boards
-
-    if (this->state){
-        ESP_LOGCONFIG(TAG, "Dcf77a attach_ms()");    
-        tickerDecisec.attach_ms(100, DcfOut); // from now on calls DcfOut every 100ms
-    }
-    else{
-        ESP_LOGCONFIG(TAG, "Dcf77a detach_ms()");
-        tickerDecisec.detach();
-    }
 }
 
 void Dcf77a::write_state(bool state) {   
@@ -45,6 +36,16 @@ void Dcf77a::write_state(bool state) {
 
     ESP_LOGW(TAG, "W Dcf77a write_state()");
     ESP_LOGCONFIG(TAG, "Dcf77a write_state()");
+    
+    if (this->state){
+        ESP_LOGCONFIG(TAG, "Dcf77a attach_ms()");    
+        tickerDecisec.attach_ms(100, DcfOut); // from now on calls DcfOut every 100ms
+    }
+    else{
+        ESP_LOGCONFIG(TAG, "Dcf77a detach_ms()");
+        tickerDecisec.detach();
+    }
+
     this->publish_state(state);
 }
 
