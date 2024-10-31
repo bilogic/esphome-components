@@ -1,13 +1,15 @@
+#include "Transmitter.h"
+#include "TransmitterConfig.h"
 #include "esphome/core/log.h"
 #include "esphome/components/time/real_time_clock.h"
 // #include "timeinfo.h" esp32 has the time already
-#include "TransmitterConfig.h"
 
 int actualHours, actualMinutes, actualSecond, actualDay, actualMonth, actualYear, DayOfW;
 int impulseArray[60];
 int impulseCount = 0;
 int timeRunningContinuous = 0;
-time::RealTimeClock * time_id;
+
+time::RealTimeClock* time_id;
 Ticker tickerDecisec; // TBD at 100ms
 
 void DcfOut()
