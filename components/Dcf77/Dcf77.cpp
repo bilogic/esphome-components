@@ -1,12 +1,22 @@
+#include "esphome/core/log.h"
 #include "Dcf77.h"
-#include "esphome/core/hal.h"
 
 namespace esphome {
 namespace Bilogic {
 
-bool Dcf77::can_proceed() {
-  return millis() >= this->utc_seconds;
+static const char *TAG = "Dcf77.switch";
+
+void Dcf77::setup() {
+
 }
 
-}  // namespace boot_delay
-}  // namespace esphome
+void Dcf77::write_state(bool state) {
+
+}
+
+void Dcf77::dump_config(){
+    ESP_LOGCONFIG(TAG, "Empty custom switch");
+}
+
+} //namespace Dcf77
+} //namespace esphome
