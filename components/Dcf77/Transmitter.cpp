@@ -19,10 +19,11 @@ Ticker tickerDecisec; // TBD at 100ms
 #define LOW 0
 #define HIGH 1
 
+GPIOPin *signal{LEDBUILTIN};
+GPIOPin *led{LEDBUILTIN};
+
 void DcfOut()
 {    
-    GPIOPin *signal{LEDBUILTIN};
-    GPIOPin *led{LEDBUILTIN};
     switch (impulseCount++)
     {
     case 0:
