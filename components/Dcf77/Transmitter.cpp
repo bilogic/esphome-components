@@ -55,7 +55,7 @@ void DcfOut()
         if (actualSecond == 59)
         {
             // Serial.println();
-            show_time();
+            // show_time();
 #ifndef CONTINUOUSMODE
             if ((dontGoToSleep == 0) or ((dontGoToSleep + onTimeAfterReset) < millis()))
                 cronCheck();
@@ -68,12 +68,12 @@ void DcfOut()
         }
         break;
     }
-    if (!getLocalTime(&timeinfo))
-    {
+    // if (!getLocalTime(&timeinfo))
+    // {
         // Serial.println("Error obtaining time...");
-        delay(3000);
-        ESP.restart();
-    }
+        // delay(3000);
+        // ESP.restart();
+    // }
     CodeTime();
 }
 
