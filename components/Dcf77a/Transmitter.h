@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Arduino.h"
 #include "esphome/components/time/real_time_clock.h"
 #include "Ticker.h"
 

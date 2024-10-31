@@ -1,7 +1,7 @@
 #include "Transmitter.h"
 #include "TransmitterConfig.h"
 #include "esphome/core/log.h"
-#include "Arduino.h"
+
 #include "esphome/components/time/real_time_clock.h"
 // #include "timeinfo.h" esp32 has the time already
 
@@ -15,9 +15,6 @@ int timeRunningContinuous = 0;
 
 esphome::time::RealTimeClock* time_id;
 Ticker tickerDecisec; // TBD at 100ms
-
-#define LOW 0
-#define HIGH 1
  
 
 void DcfOut()
