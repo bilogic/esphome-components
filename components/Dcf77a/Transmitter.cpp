@@ -3,7 +3,7 @@
 #include "esphome/core/log.h"
 #include "esphome/components/time/real_time_clock.h"
 // #include "timeinfo.h" esp32 has the time already
-#include <Ticker.h>
+
 
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
