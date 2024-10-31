@@ -13,7 +13,8 @@ void Dcf77::setup() {
 
 void Dcf77::write_state(bool state) {   
      if (this->time_id_.has_value()) {
-        auto now = this->time_id_->now();
+        auto *time_id = *this->time_id_;
+        auto now = time_id->now();
         uint8_t year = now.year - 2000;
         uint8_t month = now.month;
         uint8_t day_of_month = now.day_of_month;

@@ -16,7 +16,7 @@ class Dcf77 : public switch_::Switch, public Component {
         void set_time_id(time::RealTimeClock *time_id) { this->time_id_ = time_id; };
 
     protected:
-        optional<time::RealTimeClock *> time_id_{};
+        optional<time::RealTimeClock *> time_id_{};         
         uint32_t utc_seconds;
 };
 
