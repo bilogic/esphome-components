@@ -2,6 +2,7 @@
 
 #include "esphome/core/component.h"
 #include "esphome/components/switch/switch.h"
+#include "esphome/components/time/real_time_clock.h"
 
 namespace esphome {
 namespace Bilogic {
