@@ -1,9 +1,7 @@
 #include "Transmitter.h"
 #include "TransmitterConfig.h"
 #include "esphome/core/log.h"
-
 #include "esphome/components/time/real_time_clock.h"
-#include "esphome/core/log.h"
 
 int actualHours, actualMinutes, actualSecond, actualDay, actualMonth, actualYear, DayOfW;
 int impulseArray[60];
@@ -40,17 +38,17 @@ void DcfOut()
     case 9:
         impulseCount = 0;
 
-        if (actualSecond == 1 || actualSecond == 15 || actualSecond == 21 || actualSecond == 29)
-            ESP_LOGW(TAG, "-");
-        if (actualSecond == 36 || actualSecond == 42 || actualSecond == 45 || actualSecond == 50)
-            ESP_LOGW(TAG, "-");
-        if (actualSecond == 28 || actualSecond == 35 || actualSecond == 58)
-            ESP_LOGW(TAG, "P");
+        // if (actualSecond == 1 || actualSecond == 15 || actualSecond == 21 || actualSecond == 29)
+        //     ESP_LOGW(TAG, "-");
+        // if (actualSecond == 36 || actualSecond == 42 || actualSecond == 45 || actualSecond == 50)
+        //     ESP_LOGW(TAG, "-");
+        // if (actualSecond == 28 || actualSecond == 35 || actualSecond == 58)
+        //     ESP_LOGW(TAG, "P");
 
-        if (impulseArray[actualSecond] == 1)
-            ESP_LOGW(TAG, "0");
-        if (impulseArray[actualSecond] == 2)
-            ESP_LOGW(TAG, "1");
+        // if (impulseArray[actualSecond] == 1)
+        //     ESP_LOGW(TAG, "0");
+        // if (impulseArray[actualSecond] == 2)
+        //     ESP_LOGW(TAG, "1");
 
         if (actualSecond == 59)
         {
