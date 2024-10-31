@@ -19,9 +19,9 @@ async def to_code(config):
     await cg.register_component(var, config)
     await switch.register_switch(var, config)
 
-    # cg.add_library("Ticker", None)
+    cg.add_library("Ticker", None)
     # cg.add_library("framework-arduinoespressif32", "3.20011.230801")
-    cg.add_library("espressif32", "6.0.0")
+    # cg.add_library("espressif32", "6.0.0")
 
     if CONF_TIME_ID in config:
         time_ = await cg.get_variable(config[CONF_TIME_ID])
