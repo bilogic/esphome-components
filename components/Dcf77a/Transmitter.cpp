@@ -1,6 +1,7 @@
 #include "Transmitter.h"
 #include "TransmitterConfig.h"
 #include "esphome/core/log.h"
+#include "Arduino.h"
 #include "esphome/components/time/real_time_clock.h"
 // #include "timeinfo.h" esp32 has the time already
 
