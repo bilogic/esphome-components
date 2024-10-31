@@ -19,8 +19,8 @@ Ticker tickerDecisec; // TBD at 100ms
 #define LOW 0
 #define HIGH 1
 
-GPIOPin *signal{LEDBUILTIN};
-GPIOPin *led{LEDBUILTIN};
+esphome::gpio::GPIOPin *signal{LEDBUILTIN};
+esphome::gpio::GPIOPin *led{LEDBUILTIN};
 
 void DcfOut()
 {    
