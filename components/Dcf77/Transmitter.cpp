@@ -12,6 +12,9 @@ int timeRunningContinuous = 0;
 esphome::time::RealTimeClock* time_id;
 Ticker tickerDecisec; // TBD at 100ms
 
+#define LOW 0
+#define HIGH 1
+
 void DcfOut()
 {
     switch (impulseCount++)
