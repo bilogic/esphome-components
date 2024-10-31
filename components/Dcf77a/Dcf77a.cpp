@@ -8,7 +8,7 @@ namespace Bilogic {
 
 static const char *TAG = "Dcf77.switch";
 
-void Dcf77::setup() {        
+void Dcf77a::setup() {        
     ESP_LOGCONFIG(TAG, "Dcf77 setup()");
     
     ledcSetup(0, 77500, 8);       // DCF77 frequency
@@ -18,16 +18,16 @@ void Dcf77::setup() {
     digitalWrite(LEDBUILTIN, LOW); // LOW if LEDBUILTIN is inverted like in Wemos boards
 
     if (this->state){
-        ESP_LOGCONFIG(TAG, "Dcf77 attach_ms()");    
+        ESP_LOGCONFIG(TAG, "Dcf77a attach_ms()");    
         tickerDecisec.attach_ms(100, DcfOut); // from now on calls DcfOut every 100ms
     }
     else{
-        ESP_LOGCONFIG(TAG, "Dcf77 detach_ms()");
+        ESP_LOGCONFIG(TAG, "Dcf77a detach_ms()");
         tickerDecisec.detach();
     }
 }
 
-void Dcf77::write_state(bool state) {   
+void Dcf77a::write_state(bool state) {   
      if (this->time_id_.has_value()) {        
         time_id = *this->time_id_;
         auto now = time_id->now();
@@ -48,7 +48,7 @@ void Dcf77::write_state(bool state) {
     this->publish_state(state);
 }
 
-void Dcf77::dump_config(){
+void Dcf77a::dump_config(){
     ESP_LOGCONFIG(TAG, "Empty custom switch");
 }
 

@@ -4,11 +4,11 @@ from esphome.components import switch, time
 from esphome.const import CONF_ID, CONF_TIME_ID
 
 set_ns = cg.esphome_ns.namespace('Bilogic')
-Dcf77 = set_ns.class_('Dcf77', switch.Switch, time.RealTimeClock, cg.Component)
+Dcf77a = set_ns.class_('Dcf77a', switch.Switch, time.RealTimeClock, cg.Component)
 CONF_UTC = "utc_seconds"
 
 CONFIG_SCHEMA = switch.SWITCH_SCHEMA.extend({
-    cv.GenerateID(): cv.declare_id(Dcf77),    
+    cv.GenerateID(): cv.declare_id(Dcf77a),
     cv.Optional(CONF_TIME_ID): cv.use_id(time.RealTimeClock)
     # cv.Optional(CONF_UTC): 28800,
     # cv.Required(CONF_UTC): cv.use_id(uart.UARTComponent)
