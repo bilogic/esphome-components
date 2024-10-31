@@ -19,7 +19,7 @@ async def to_code(config):
     await cg.register_component(var, config)
     await switch.register_switch(var, config)
 
-    # cg.add_library("ESP32Ticker", None)
+    cg.add_library("Ticker-esp32", None)
     # cg.add_library("framework-arduinoespressif32", "3.20011.230801")
     # cg.add_library("espressif32", "6.0.0")
 
