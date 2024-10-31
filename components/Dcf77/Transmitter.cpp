@@ -7,7 +7,6 @@
 
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
-#include "esphome/components/stepper/stepper.h"
 
 int actualHours, actualMinutes, actualSecond, actualDay, actualMonth, actualYear, DayOfW;
 int impulseArray[60];
