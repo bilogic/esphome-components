@@ -16,7 +16,7 @@ void Dcf77::setup() {
 // }
 
 void Dcf77::write_state(bool state) {
-    Switch::write_state(state);
+    switch_::write_state(state);
 }
 
 void Dcf77::dump_config(){
