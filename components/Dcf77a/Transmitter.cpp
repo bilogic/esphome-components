@@ -15,7 +15,8 @@ int timeRunningContinuous = 0;
 
 esphome::time::RealTimeClock* time_id;
 Ticker tickerDecisec; // TBD at 100ms
- 
+
+static const char *TAG = "Transmitter"; 
 
 void DcfOut()
 {    
@@ -42,17 +43,17 @@ void DcfOut()
     case 9:
         impulseCount = 0;
 
-        // if (actualSecond == 1 || actualSecond == 15 || actualSecond == 21 || actualSecond == 29)
-        //     Serial.print("-");
-        // if (actualSecond == 36 || actualSecond == 42 || actualSecond == 45 || actualSecond == 50)
-        //     Serial.print("-");
-        // if (actualSecond == 28 || actualSecond == 35 || actualSecond == 58)
-        //     Serial.print("P");
+        if (actualSecond == 1 || actualSecond == 15 || actualSecond == 21 || actualSecond == 29)
+            ESP_LOGW(TAG, "-");
+        if (actualSecond == 36 || actualSecond == 42 || actualSecond == 45 || actualSecond == 50)
+            ESP_LOGW(TAG, "-");
+        if (actualSecond == 28 || actualSecond == 35 || actualSecond == 58)
+            ESP_LOGW(TAG, "P");
 
-        // if (impulseArray[actualSecond] == 1)
-        //     Serial.print("0");
-        // if (impulseArray[actualSecond] == 2)
-        //     Serial.print("1");
+        if (impulseArray[actualSecond] == 1)
+            ESP_LOGW(TAG, "0");
+        if (impulseArray[actualSecond] == 2)
+            ESP_LOGW(TAG, "1");
 
         if (actualSecond == 59)
         {
