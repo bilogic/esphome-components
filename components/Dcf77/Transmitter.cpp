@@ -1,3 +1,4 @@
+#include "esphome/components/time/real_time_clock.h"
 // #include "timeinfo.h" esp32 has the time already
 #include "TransmitterConfig.h"
 
@@ -5,6 +6,7 @@ int actualHours, actualMinutes, actualSecond, actualDay, actualMonth, actualYear
 int impulseArray[60];
 int impulseCount = 0;
 int timeRunningContinuous = 0;
+time::RealTimeClock* time_id
 
 int Bin2Bcd(int dato)
 {
@@ -17,21 +19,21 @@ int Bin2Bcd(int dato)
 }
 
 void CodeTime()
-{
-    DayOfW = timeinfo.tm_wday;
-    if (DayOfW == 0)
-        DayOfW = 7;
-    actualDay = timeinfo.tm_mday;
-    actualMonth = timeinfo.tm_mon + 1;
-    actualYear = timeinfo.tm_year - 100;
-    actualHours = timeinfo.tm_hour;
-    actualMinutes = timeinfo.tm_min + 1; // DCF77 transmitts the next minute
+{    
+    auto now = time_id->now();
+    actualYear = now.year - 2000;
+    actualMonth = now.month;
+    actualDay = now.day_of_month;
+    actualHours   = now.hour;
+    actualMinutes   = now.minute;
+    actualSecond   = now.second;
+
     if (actualMinutes >= 60)
     {
         actualMinutes = 0;
         actualHours++;
     }
-    actualSecond = timeinfo.tm_sec;
+
     if (actualSecond == 60)
         actualSecond = 0;
 
@@ -43,7 +45,7 @@ void CodeTime()
         impulseArray[n] = 1;
 
     // set DST bit
-    if (timeinfo.tm_isdst == 0)
+    if (1)//timeinfo.tm_isdst == 0)
     {
         impulseArray[18] = 2; // CET or DST OFF
     }
