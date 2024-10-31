@@ -9,7 +9,7 @@ int impulseArray[60];
 int impulseCount = 0;
 int timeRunningContinuous = 0;
 
-time::RealTimeClock* time_id;
+esphome::time::RealTimeClock* time_id;
 Ticker tickerDecisec; // TBD at 100ms
 
 void DcfOut()
