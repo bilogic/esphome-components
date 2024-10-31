@@ -6,7 +6,8 @@
 namespace esphome {
 namespace Bilogic {
 
-class Dcf77 : public switch_::Switch, public Component {
+// class Dcf77 : public switch_::Switch, public Component {
+class Dcf77 : public Component, public Switch {
     public:
         void setup() override;
         void write_state(bool state) override;
