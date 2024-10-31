@@ -1,7 +1,7 @@
 #include "esphome/core/log.h"
 #include "Dcf77.h"
-#include "Tranmitter.h"
-#include "TranmitterConfig.h"
+#include "Transmitter.h"
+#include "TransmitterConfig.h"
 
 namespace esphome {
 namespace Bilogic {
