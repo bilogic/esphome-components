@@ -9,7 +9,7 @@ namespace Bilogic {
 static const char *TAG = "Dcf77.switch";
 
 void Dcf77a::setup() {        
-    ESP_LOGCONFIG(TAG, "Dcf77 setup()");
+    ESP_LOGCONFIG(TAG, "Dcf77a setup()");
     
     ledcSetup(0, 77500, 8);       // DCF77 frequency
     ledcAttachPin(ANTENNAPIN, 0); // This Pin, or another one you choose, has to be attached to the antenna
@@ -43,8 +43,8 @@ void Dcf77a::write_state(bool state) {
         ESP_LOGW(TAG, "LOCAL_TIME_QUERY is not handled because time is not configured");
       }
 
-    ESP_LOGW(TAG, "W Dcf77 state()");
-    ESP_LOGCONFIG(TAG, "Dcf77 setup()");
+    ESP_LOGW(TAG, "W Dcf77a write_state()");
+    ESP_LOGCONFIG(TAG, "Dcf77a write_state()");
     this->publish_state(state);
 }
 
