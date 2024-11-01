@@ -11,7 +11,7 @@ void EmptySwitch::setup() {
 }
 
 void EmptySwitch::write_state(bool state) {
-
+    this->publish_state(state);
 }
 
 void EmptySwitch::dump_config(){
