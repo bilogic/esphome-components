@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Arduino.h"
 #include "esphome/components/time/real_time_clock.h"
+#include "Arduino.h"
 #include "Ticker.h"
 
 extern int actualHours, actualMinutes, actualSecond, actualDay, actualMonth, actualYear, DayOfW;

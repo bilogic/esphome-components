@@ -8,13 +8,13 @@ int impulseArray[60];
 int impulseCount = 0;
 int timeRunningContinuous = 0;
 
-esphome::time::RealTimeClock* time_id;
+esphome::time::RealTimeClock *time_id;
 Ticker tickerDecisec; // TBD at 100ms
 
-static const char *TAG = "Transmitter"; 
+static const char *TAG = "Transmitter";
 
 void DcfOut()
-{    
+{
     switch (impulseCount++)
     {
     case 0:
@@ -31,7 +31,7 @@ void DcfOut()
             ledcWrite(0, 127);
         }
         break;
-    case 2:        
+    case 2:
         digitalWrite(LEDBUILTIN, HIGH);
         ledcWrite(0, 127);
         break;
@@ -68,13 +68,12 @@ void DcfOut()
     }
     // if (!getLocalTime(&timeinfo))
     // {
-        // Serial.println("Error obtaining time...");
-        // delay(3000);
-        // ESP.restart();
+    // Serial.println("Error obtaining time...");
+    // delay(3000);
+    // ESP.restart();
     // }
     CodeTime();
 }
-
 
 int Bin2Bcd(int dato)
 {
@@ -87,14 +86,14 @@ int Bin2Bcd(int dato)
 }
 
 void CodeTime()
-{    
+{
     auto now = time_id->now();
     actualYear = now.year - 2000;
     actualMonth = now.month;
     actualDay = now.day_of_month;
-    actualHours   = now.hour;
-    actualMinutes   = now.minute;
-    actualSecond   = now.second;
+    actualHours = now.hour;
+    actualMinutes = now.minute;
+    actualSecond = now.second;
 
     if (actualMinutes >= 60)
     {
@@ -108,12 +107,12 @@ void CodeTime()
     int n, Tmp, TmpIn;
     int ParityCount = 0;
 
-    //we put the first 20 bits of each minute at a logical zero value
+    // we put the first 20 bits of each minute at a logical zero value
     for (n = 0; n < 20; n++)
         impulseArray[n] = 1;
 
     // set DST bit
-    if (1)//timeinfo.tm_isdst == 0)
+    if (1) // timeinfo.tm_isdst == 0)
     {
         impulseArray[18] = 2; // CET or DST OFF
     }
@@ -122,10 +121,10 @@ void CodeTime()
         impulseArray[17] = 2; // CEST or DST ON
     }
 
-    //bit 20 must be 1 to indicate active time
+    // bit 20 must be 1 to indicate active time
     impulseArray[20] = 2;
 
-    //calculates the bits for the minutes
+    // calculates the bits for the minutes
     TmpIn = Bin2Bcd(actualMinutes);
     for (n = 21; n < 28; n++)
     {
@@ -139,7 +138,7 @@ void CodeTime()
     else
         impulseArray[28] = 2;
 
-    //calculates bits for the hours
+    // calculates bits for the hours
     ParityCount = 0;
     TmpIn = Bin2Bcd(actualHours);
     for (n = 29; n < 35; n++)
@@ -155,7 +154,7 @@ void CodeTime()
         impulseArray[35] = 2;
     ParityCount = 0;
 
-    //calculate the bits for the actual Day of Month
+    // calculate the bits for the actual Day of Month
     TmpIn = Bin2Bcd(actualDay);
     for (n = 36; n < 42; n++)
     {
@@ -172,7 +171,7 @@ void CodeTime()
         ParityCount += Tmp;
         TmpIn >>= 1;
     }
-    //calculates the bits for the actualMonth
+    // calculates the bits for the actualMonth
     TmpIn = Bin2Bcd(actualMonth);
     for (n = 45; n < 50; n++)
     {
@@ -181,7 +180,7 @@ void CodeTime()
         ParityCount += Tmp;
         TmpIn >>= 1;
     }
-    //calculates the bits for actual year
+    // calculates the bits for actual year
     TmpIn = Bin2Bcd(actualYear); // 2 digit year
     for (n = 50; n < 58; n++)
     {
@@ -190,12 +189,12 @@ void CodeTime()
         ParityCount += Tmp;
         TmpIn >>= 1;
     }
-    //equal date
+    // equal date
     if ((ParityCount & 1) == 0)
         impulseArray[58] = 1;
     else
         impulseArray[58] = 2;
 
-    //last missing pulse
+    // last missing pulse
     impulseArray[59] = 0; // No pulse
 }
